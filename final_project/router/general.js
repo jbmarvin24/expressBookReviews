@@ -32,13 +32,15 @@ public_users.post("/register", (req, res) => {
 
 // Get the book list available in the shop
 public_users.get('/', async function (req, res) {
-    const fetchBooks = await (new Promise((resolve, reject) => {
+    (new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(books)
         }, 1000)
-    }))
+    })).then(() => {
+        res.send(JSON.stringify({books: fetchBooks}, null, 4))
+    })
 
-    res.send(JSON.stringify({books: fetchBooks}, null, 4))
+    
 });
 
 // Get book details based on ISBN
